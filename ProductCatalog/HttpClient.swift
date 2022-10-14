@@ -35,12 +35,29 @@ class HttpClient {
                 if error != nil {
                     completion(NetworkResponse.failure(.network))
                 }
-                if let safeData = data {
-                    if let decodedData = try? JSONDecoder().decode(T.self, from: safeData) {
+                if let receivedData = data {
+                    if let decodedData = try? JSONDecoder().decode(T.self, from: receivedData) {
                         completion(NetworkResponse.success(decodedData))
-                    } else {
+                    }
+                    else {
                         completion(NetworkResponse.failure(.decoding))
                     }
+                }
+            }.resume()
+        }
+    }
+    
+    static func sendDataRequest(url: String, completion: @escaping (NetworkResponse<Data, NetworkError>) -> Void) {
+        if let url = URL(string: url) {
+            URLSession.shared.dataTask(with: url) { (data, response, error) in
+                if error != nil {
+                    completion(NetworkResponse.failure(.network))
+                }
+                if let receivedData = data {
+                    completion(NetworkResponse.success(receivedData))
+                }
+                else {
+                    completion(NetworkResponse.failure(.network))
                 }
             }.resume()
         }

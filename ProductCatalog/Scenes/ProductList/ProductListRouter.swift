@@ -6,3 +6,18 @@
 //
 
 import Foundation
+
+
+protocol ProductListRouterProtocol {
+    func routeToDetailScreen(productId: String)
+}
+
+
+class ProductListRouter: ProductListRouterProtocol {
+    func routeToDetailScreen(productId: String) {
+        let detailScreen = ProductDetailsViewController()
+        detailScreen.productId = productId
+        AppDelegate.navigationController()?.pushViewController(detailScreen, animated: true)
+        return
+    }
+}

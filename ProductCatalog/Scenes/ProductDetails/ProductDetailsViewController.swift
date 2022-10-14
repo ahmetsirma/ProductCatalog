@@ -8,7 +8,13 @@
 import UIKit
 
 class ProductDetailsViewController: UIViewController {
-
+    var productDetails: ProductDetailsPresentation?
+    var productId: String? {
+        didSet {
+            
+        }
+    }
+    
     @IBOutlet weak var imgPoster: UIImageView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,5 +33,24 @@ class ProductDetailsViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    func displayProduct(product: ProductDetailsPresentation?) {
+        self.productDetails = product
+        
+        UIImage.loadCachedImage1(urlStr: self.productDetails?.image!) { image in
+            <#code#>
+        }
+        
+        
+        
+        /*loadCachedImage(url: self.productDetails?.image) { image in
+            self.imgPoster.image = image
+        }
+        
+        DispatchQueue.main.async {
+            
+        }*/
+        return
+    }
 
 }

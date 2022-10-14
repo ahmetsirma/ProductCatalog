@@ -17,12 +17,13 @@ struct ProductDetails: Decodable {
 
 class ProductDetailsModel {
     
-    func getProductDetails(productID: String) {
+    func getProductDetails(productID: String, completion: @escaping (_ productDetails: ProductDetails) -> Void) {
         HttpClient.sendRequest(url: "https://s3-eu-west-1.amazonaws.com/developer-application-test/cart/\(productID)/detail") { (response: NetworkResponse<ProductDetails, NetworkError>) in
             switch response {
             case .success(let response):
                 print("Response:", response)
-                let productList = response
+                let productDetails = response
+                completion(productDetails)
                 break
             case .failure(let error):
                 print("error:", error.errorMessage)

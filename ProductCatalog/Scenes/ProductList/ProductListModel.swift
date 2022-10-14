@@ -7,12 +7,11 @@
 
 import Foundation
 
-
-struct ProductList: Decodable {
+struct ProductList: Decodable, Equatable {
     let products: [Product]
 }
 
-struct Product: Decodable {
+struct Product: Decodable, Equatable {
     let product_id: String
     let name: String
     let price: Int
@@ -21,12 +20,13 @@ struct Product: Decodable {
 
 class ProductListModel {
     
-    func getProductList() {
+    func getProductList(completion: @escaping (_ productList: [Product]) -> Void) {
         HttpClient.sendRequest(url: "https://s3-eu-west-1.amazonaws.com/developer-application-test/cart/list") { (response: NetworkResponse<ProductList, NetworkError>) in
             switch response {
             case .success(let response):
                 print("Response:", response)
                 let productList = response.products
+                completion(productList)
                 break
             case .failure(let error):
                 print("error:", error.errorMessage)
