@@ -31,6 +31,7 @@ enum NetworkError: Error {
 class HttpClient {
     static func sendRequest<T: Decodable>(url: String, completion: @escaping (NetworkResponse<T, NetworkError>) -> Void) {
         if let url = URL(string: url) {
+            print("url:\(url)")
             URLSession.shared.dataTask(with: url) { (data, response, error) in
                 if error != nil {
                     completion(NetworkResponse.failure(.network))

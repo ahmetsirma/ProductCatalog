@@ -9,15 +9,21 @@ import UIKit
 
 class ProductDetailsViewController: UIViewController {
     var productDetails: ProductDetailsPresentation?
+    let viewModel = ProductDetailsViewModel()
     var productId: String? {
         didSet {
-            
+            if productId != nil {
+                viewModel.view = self
+                viewModel.getProductDetails(productId: productId!)
+            }
         }
     }
     
     @IBOutlet weak var imgPoster: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        viewModel.view = self
 
         // Do any additional setup after loading the view.
     }
@@ -35,11 +41,25 @@ class ProductDetailsViewController: UIViewController {
     */
     
     func displayProduct(product: ProductDetailsPresentation?) {
-        self.productDetails = product
-        
-        UIImage.loadCachedImage1(urlStr: self.productDetails?.image!) { image in
-            <#code#>
+        if let prod = product {
+            self.productDetails = prod
+            let text = (self.productDetails?.name ?? "") + "\n" + (self.productDetails?.description ?? "")
+            
+            DispatchQueue.main.async {
+                self.lblDescription.text = text
+                self.lblDescription.sizeToFit()
+            }
+            
+            UIImage.loadCachedImage(urlStr: self.productDetails!.image) { img in
+                DispatchQueue.main.async {
+                    self.imgPoster.image = img
+                }
+            }
         }
+        
+        /*UIImage.loadCachedImage1(urlStr: self.productDetails?.image!) { image in
+            
+        }*/
         
         
         

@@ -12,7 +12,7 @@ struct ProductDetailsPresentation: Decodable {
     let name: String
     let price: Int
     let image: String
-    let description: String
+    let description: String?
 }
 
 protocol ProductDetailsViewModelProtocol {
@@ -21,11 +21,12 @@ protocol ProductDetailsViewModelProtocol {
 
 class ProductDetailsViewModel: ProductDetailsViewModelProtocol {
     let model = ProductDetailsModel()
-    var view: ProductDetailsViewController?
+    var view:ProductDetailsViewController?
+    
     func getProductDetails(productId: String) {
         model.getProductDetails(productID: productId) { productDetails in
-            let productDetailsPresentation = {ProductDetailsPresentation( product_id: productDetails.product_id, name: productDetails.name, price: productDetails.price, image: productDetails.image, description: productDetails.description )}
-            self.view?.displayProduct(product: productDetails)
+            let detailsPresentation = ProductDetailsPresentation( product_id: productDetails.product_id, name: productDetails.name, price: productDetails.price, image: productDetails.image, description: productDetails.description )
+            self.view?.displayProduct(product: detailsPresentation)
         }
     }
 }

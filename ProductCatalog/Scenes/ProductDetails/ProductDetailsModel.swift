@@ -12,7 +12,7 @@ struct ProductDetails: Decodable {
     let name: String
     let price: Int
     let image: String
-    let description: String
+    let description: String?
 }
 
 class ProductDetailsModel {

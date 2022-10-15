@@ -11,10 +11,11 @@ import UIKit
 extension UIImage {
     static let imageCache = NSCache<AnyObject, AnyObject>()
     
-    static func loadCachedImage1(urlStr: String, completion: @escaping (_ image1: UIImage) -> Void ) {
+    static func loadCachedImage(urlStr: String, completion: @escaping (_ img: UIImage) -> Void ) {
         
         if let cachedImage = UIImage.imageCache.object(forKey: urlStr as AnyObject) as? UIImage {
             completion(cachedImage)
+            return
         }
         
         HttpClient.sendDataRequest(url: urlStr) { (response: NetworkResponse<Data, NetworkError>) in
@@ -22,6 +23,7 @@ extension UIImage {
             case .success(let response):
                 print("Response:", response)
                 if let image = UIImage(data: response) {
+                    imageCache.setObject(image as AnyObject, forKey: urlStr as AnyObject)
                     completion(image)
                 }
                 else {

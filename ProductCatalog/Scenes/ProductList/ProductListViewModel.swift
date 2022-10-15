@@ -16,12 +16,13 @@ struct ProductPresentation: Decodable, Equatable {
 
 protocol ProductListViewModelProtocol {
     func getProductList()
-    func productSelected(product: Product)
+    func productSelected(product: ProductPresentation)
 }
 
 class ProductListViewModel: ProductListViewModelProtocol {
     let model = ProductListModel()
     var view: ProductListViewController? = nil
+    let router = ProductListRouter()
     
     func getProductList() {
         //get from model
@@ -33,8 +34,8 @@ class ProductListViewModel: ProductListViewModelProtocol {
         return
     }
     
-    func productSelected(product: Product) {
-        //call display details from router
+    func productSelected(product: ProductPresentation) {
+        router.routeToDetailScreen(productId: product.product_id)
         return
     }
 }

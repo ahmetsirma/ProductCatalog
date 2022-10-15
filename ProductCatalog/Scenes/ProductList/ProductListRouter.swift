@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 
 protocol ProductListRouterProtocol {
@@ -15,9 +16,10 @@ protocol ProductListRouterProtocol {
 
 class ProductListRouter: ProductListRouterProtocol {
     func routeToDetailScreen(productId: String) {
-        let detailScreen = ProductDetailsViewController()
-        detailScreen.productId = productId
+        let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
+        let detailScreen = storyboard.instantiateViewController(withIdentifier: "ProductDetailsViewController") as! ProductDetailsViewController
         AppDelegate.navigationController()?.pushViewController(detailScreen, animated: true)
+        detailScreen.productId = productId
         return
     }
 }

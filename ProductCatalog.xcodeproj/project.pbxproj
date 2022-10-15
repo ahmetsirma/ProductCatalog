@@ -25,6 +25,7 @@
 		41561B2028F7EA3500669971 /* ProductDetailsRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41561B1F28F7EA3500669971 /* ProductDetailsRouter.swift */; };
 		41561B2228F8027E00669971 /* HttpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41561B2128F8027E00669971 /* HttpClient.swift */; };
 		41561B2428F943A000669971 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41561B2328F943A000669971 /* Extensions.swift */; };
+		41B1060A28FAE18D00F1B28D /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41B1060928FAE18D00F1B28D /* Configuration.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +68,7 @@
 		41561B1F28F7EA3500669971 /* ProductDetailsRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductDetailsRouter.swift; sourceTree = "<group>"; };
 		41561B2128F8027E00669971 /* HttpClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HttpClient.swift; sourceTree = "<group>"; };
 		41561B2328F943A000669971 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		41B1060928FAE18D00F1B28D /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,6 +128,7 @@
 				4155031E28F737FF00A1700E /* Info.plist */,
 				41561B2128F8027E00669971 /* HttpClient.swift */,
 				41561B2328F943A000669971 /* Extensions.swift */,
+				41B1060928FAE18D00F1B28D /* Configuration.swift */,
 			);
 			path = ProductCatalog;
 			sourceTree = "<group>";
@@ -316,6 +319,7 @@
 				4155031128F737FC00A1700E /* AppDelegate.swift in Sources */,
 				41561B2028F7EA3500669971 /* ProductDetailsRouter.swift in Sources */,
 				41561B1C28F7E9C400669971 /* ProductDetailsModel.swift in Sources */,
+				41B1060A28FAE18D00F1B28D /* Configuration.swift in Sources */,
 				41561B2428F943A000669971 /* Extensions.swift in Sources */,
 				41561B2228F8027E00669971 /* HttpClient.swift in Sources */,
 				4155031328F737FC00A1700E /* SceneDelegate.swift in Sources */,
