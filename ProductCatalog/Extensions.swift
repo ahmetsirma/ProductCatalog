@@ -21,7 +21,6 @@ extension UIImage {
         HttpClient.sendDataRequest(url: urlStr) { (response: NetworkResponse<Data, NetworkError>) in
             switch response {
             case .success(let response):
-                print("Response:", response)
                 if let image = UIImage(data: response) {
                     imageCache.setObject(image as AnyObject, forKey: urlStr as AnyObject)
                     completion(image)

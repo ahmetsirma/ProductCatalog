@@ -6,6 +6,8 @@
 //
 
 import Foundation
+import UIKit
+import CoreData
 
 struct ProductPresentation: Decodable, Equatable {
     let product_id: String
@@ -30,7 +32,6 @@ class ProductListViewModel: ProductListViewModelProtocol {
             let products = productList.map{ProductPresentation( product_id: $0.product_id, name: $0.name, price: $0.price, image: $0.image )}
             self.view?.displayProducts(products: products)
         }
-        //call display from view
         return
     }
     

@@ -27,9 +27,14 @@ class ProductListModel {
                 print("Response:", response)
                 let productList = response.products
                 completion(productList)
+                Database.clearAll()
+                Database.saveProducts(products: productList)
                 break
             case .failure(let error):
+                let savedProducts = Database.getSavedProduct()
+                print(savedProducts)
                 print("error:", error.errorMessage)
+                completion(savedProducts)
             }
         }
     }
