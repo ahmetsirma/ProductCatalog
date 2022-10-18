@@ -19,9 +19,9 @@ protocol ProductDetailsViewModelProtocol {
     func getProductDetails(productId: String)
 }
 
-class ProductDetailsViewModel: ProductDetailsViewModelProtocol {
+final class ProductDetailsViewModel: ProductDetailsViewModelProtocol {
     let model = ProductDetailsModel()
-    var view:ProductDetailsViewController?
+    weak var view:ProductDetailsViewController?
     
     func getProductDetails(productId: String) {
         model.getProductDetails(productID: productId) { productDetails in

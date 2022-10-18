@@ -14,7 +14,7 @@ protocol ProductListRouterProtocol {
 }
 
 
-class ProductListRouter: ProductListRouterProtocol {
+final class ProductListRouter: ProductListRouterProtocol {
     func routeToDetailScreen(productId: String) {
         let storyboard = UIStoryboard(name: "Main", bundle: Bundle.main)
         let detailScreen = storyboard.instantiateViewController(withIdentifier: "ProductDetailsViewController") as! ProductDetailsViewController

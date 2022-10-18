@@ -14,12 +14,14 @@ class ProductDetailsViewController: UIViewController {
         didSet {
             if productId != nil {
                 viewModel.view = self
+                self.indLoading?.startAnimating()
                 viewModel.getProductDetails(productId: productId!)
             }
         }
     }
     
     @IBOutlet weak var imgPoster: UIImageView!
+    @IBOutlet weak var indLoading: UIActivityIndicatorView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,6 +50,7 @@ class ProductDetailsViewController: UIViewController {
             DispatchQueue.main.async {
                 self.lblDescription.text = text
                 self.lblDescription.sizeToFit()
+                self.indLoading.stopAnimating()
             }
             
             UIImage.loadCachedImage(urlStr: self.productDetails!.image) { img in
@@ -57,19 +60,6 @@ class ProductDetailsViewController: UIViewController {
             }
         }
         
-        /*UIImage.loadCachedImage1(urlStr: self.productDetails?.image!) { image in
-            
-        }*/
-        
-        
-        
-        /*loadCachedImage(url: self.productDetails?.image) { image in
-            self.imgPoster.image = image
-        }
-        
-        DispatchQueue.main.async {
-            
-        }*/
         return
     }
 

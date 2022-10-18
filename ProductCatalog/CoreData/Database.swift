@@ -9,22 +9,24 @@ import Foundation
 import CoreData
 import UIKit
 
-class Database {
+final class Database {
     
     static func clearAll() {
-        do {
-            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                return
+        DispatchQueue.main.async {
+            do {
+                guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                    return
+                }
+                let context = appDelegate.persistentContainer.viewContext
+                let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ProductEntity")
+                let fetchedObjects = try context.fetch(fetchRequest) as? [NSManagedObject] ?? []
+                for object in fetchedObjects {
+                    context.delete(object)
+                }
             }
-            let context = appDelegate.persistentContainer.viewContext
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "ProductEntity")
-            let fetchedObjects = try context.fetch(fetchRequest) as? [NSManagedObject] ?? []
-            for object in fetchedObjects {
-                context.delete(object)
+            catch let err {
+                print(err)
             }
-        }
-        catch let err {
-            print(err)
         }
         
         

@@ -8,6 +8,6 @@
 import Foundation
 
 
-class Configuration {
+final class Configuration {
     public static let ProductListPosterSize: CGSize = CGSize(width: 150, height: 250)
 }

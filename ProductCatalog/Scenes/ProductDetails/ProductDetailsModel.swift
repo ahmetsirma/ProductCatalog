@@ -15,7 +15,7 @@ struct ProductDetails: Decodable {
     let description: String?
 }
 
-class ProductDetailsModel {
+final class ProductDetailsModel {
     
     func getProductDetails(productID: String, completion: @escaping (_ productDetails: ProductDetails) -> Void) {
         HttpClient.sendRequest(url: "https://s3-eu-west-1.amazonaws.com/developer-application-test/cart/\(productID)/detail") { (response: NetworkResponse<ProductDetails, NetworkError>) in

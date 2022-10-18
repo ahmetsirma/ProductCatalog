@@ -21,13 +21,12 @@ protocol ProductListViewModelProtocol {
     func productSelected(product: ProductPresentation)
 }
 
-class ProductListViewModel: ProductListViewModelProtocol {
+final class ProductListViewModel: ProductListViewModelProtocol {
     let model = ProductListModel()
-    var view: ProductListViewController? = nil
     let router = ProductListRouter()
+    weak var view: ProductListViewController? = nil
     
     func getProductList() {
-        //get from model
         model.getProductList { productList in
             let products = productList.map{ProductPresentation( product_id: $0.product_id, name: $0.name, price: $0.price, image: $0.image )}
             self.view?.displayProducts(products: products)

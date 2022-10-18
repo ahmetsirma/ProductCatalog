@@ -18,7 +18,7 @@ struct Product: Decodable, Equatable {
     let image: String
 }
 
-class ProductListModel {
+final class ProductListModel {
     
     func getProductList(completion: @escaping (_ productList: [Product]) -> Void) {
         HttpClient.sendRequest(url: "https://s3-eu-west-1.amazonaws.com/developer-application-test/cart/list") { (response: NetworkResponse<ProductList, NetworkError>) in

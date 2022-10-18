@@ -10,27 +10,61 @@ import XCTest
 
 final class ProductCatalogTests: XCTestCase {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    private var productListView: ProductListViewControllerTest!
+    private var productListViewModel: ProductListViewModel!
+    private var productListModel: ProductListModel!
+    
+    private var productDetailsView: ProductDetailsViewControllerTest!
+    private var productDetailsViewModel: ProductDetailsViewModel!
+    private var productDetailsModel: ProductDetailsModel!
+    
+    override func setUp() {
+        productListModel = ProductListModel()
+        productListViewModel = ProductListViewModel()
+        productListView = ProductListViewControllerTest()
+        productListViewModel.view = productListView
+        
+        productDetailsModel = ProductDetailsModel()
+        productDetailsViewModel = ProductDetailsViewModel()
+        productDetailsView = ProductDetailsViewControllerTest()
+        productDetailsViewModel.view = productDetailsView
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    
+    //Product List Tests
+    class ProductListViewControllerTest: ProductListViewController {
+        override func displayProducts(products: [ProductPresentation]) {
+            XCTAssertTrue(products.count > 0)
         }
     }
-
+    
+    func testProductListLoad() throws {
+        productListView.viewDidLoad()
+    }
+    
+    func testProductListNavigation() throws {
+        productListViewModel.productSelected(product: ProductPresentation(product_id: "1", name: "Apple", price: 0, image: ""))
+    }
+    
+    
+    
+    //Product Details Tests
+    class ProductDetailsViewControllerTest: ProductDetailsViewController {
+        override var productId: String? {
+            didSet {
+                XCTAssertNotNil(productId)
+            }
+        }
+    }
+    
+    func testProductDetailsLoad() throws {
+        productDetailsView.viewDidLoad()
+    }
+    
+    func testProductDetailsModel() throws {
+        let model = ProductDetailsModel()
+        model.getProductDetails(productID: "1", completion: { productDetails in
+            XCTAssertNotNil(productDetails)
+        })
+    }
 }

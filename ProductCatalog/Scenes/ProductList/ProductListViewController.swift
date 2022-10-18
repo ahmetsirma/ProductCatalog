@@ -12,22 +12,20 @@ class ProductListViewController: UIViewController {
     var productList: [ProductPresentation] = []
     
     @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var indLoading: UIActivityIndicatorView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.viewModel.view = self
         
-        self.collectionView.delegate = self
-        self.collectionView.dataSource = self
-        self.collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "ProductCollectionCell")
+        self.collectionView?.delegate = self
+        self.collectionView?.dataSource = self
+        self.collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "ProductCollectionCell")
         
         self.viewModel.getProductList()
+        self.indLoading?.startAnimating()
         
-        /*let pm = ProductListModel()
-        pm.getProductList()
-        
-        let pd = ProductDetailsModel()
-        pd.getProductDetails(productID: "1")*/
     }
     
     
@@ -35,6 +33,7 @@ class ProductListViewController: UIViewController {
         self.productList = products
         DispatchQueue.main.async {
             self.collectionView.reloadData()
+            self.indLoading.stopAnimating()
         }
         return
     }
